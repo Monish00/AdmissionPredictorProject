@@ -1,0 +1,49 @@
+{% include 'user_header.html' %}
+{% load static %}
+<div class="col-xl-9 col-lg-9 col-md-12 col-sm-12 col-12" style="padding-top: 50px;">
+    <div class="card">
+        <h5 class="card-header">Search Medical College</h5>
+        <div class="card-body">
+            {% if messages %}
+                {% for i in messages %}
+                    <div class="alert alert-success">{{i}}</div>
+                {% endfor %}
+            {% endif %}
+            <form  id="basicform" method="post" enctype="multipart/form-data">{% csrf_token %}
+              
+                    <select name="degree" class="form-control" style="width:250px;float: left;margin-right: 50px;">
+                        <option value="">Select Degree</option>
+                        {% for i in row %}
+                            <option value="{{i.0}}">{{i.0}}</option>
+                        {% endfor %}
+                    </select>
+                     <select name="department" class="form-control" style="width:250px;float: left;margin-right: 50px;">
+                        <option value="">Select Department</option>
+                        {% for i in row1 %}
+                            <option value="{{i.0}}">{{i.0}}</option>
+                        {% endfor %}
+                    </select>
+
+               <input id="inputUserName" type="text" name="cutoff_mark" required="required"  class="form-control" placeholder="Enter Cuttoff Mark" style="width:250px;float: left;margin-right: 50px;"><div style="clear:both;"></div><br>
+                <button type="submit" class="btn btn-space btn-success">PREDICT MEDICAL COLLEGE   </button>
+               
+            </form>
+            <br><Br>
+            <div class="row">
+                {% for i in a %}
+                <h3>{{i.college_name}}</h3>
+                <div class="col-md-5">
+                    <img src="{% static 'images/1.jpg' %}" style="width:100%;">
+                </div>
+                <div class="col-md-5">
+                    <h4 style="font-size:15px;">Degree: {{i.degree}}</h4>
+                    <h4 style="font-size:15px;">Department : {{i.department}}</h4>
+                
+                    <a href="{% for i in link %}{% if forloop.last %}{{i}}   {% endif %}
+                 {% endfor %}" class="btn btn-primary" target="_blank">College Details</a>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</div>
